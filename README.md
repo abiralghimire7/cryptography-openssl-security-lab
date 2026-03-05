@@ -1,5 +1,10 @@
 # cryptography-openssl-security-lab
 This project demonstrates cryptography fundamentals and basic vulnerability assessment techniques using OpenSSL, Nmap, and the Metasploit Framework in a controlled Kali Linux lab environment.
+## Lab Environment
+
+Attacker Machine: Kali Linux  
+Target Machine: Metasploitable VM  
+Tools: OpenSSL, Nmap, Metasploit
 
 ## Tools Used
 - Kali Linux
